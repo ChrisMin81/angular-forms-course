@@ -21,7 +21,9 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/global-styles.scss"
+
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -81,7 +83,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/global-styles.scss"
             ],
             "assets": [
               "src/assets",

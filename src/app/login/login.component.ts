@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from "@angular/forms";
 
 
 @Component({
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  val = {
+    email: 'christian@minatti.tirol',
+    password: '123456'
+  }
 
   constructor() {
 
@@ -18,4 +22,8 @@ export class LoginComponent implements OnInit {
 
   }
 
+  logLogin(loginForm: NgForm, $event: any) {
+    console.log(loginForm.value, loginForm.valid, $event)
+    console.log(this.val)
+  }
 }
