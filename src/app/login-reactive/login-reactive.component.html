@@ -2,26 +2,57 @@
   <mat-card-title>Login (Reactive)</mat-card-title>
   <mat-card-content>
 
-    <form class="login-form data-form">
+    <form class="login-form data-form" [formGroup]="form">
 
       <mat-form-field>
 
         <input matInput type="email" name="email"
-               placeholder="Email">
 
+               placeholder="Email" formControlName="email">
+
+        <mat-error *ngIf="email.errors?.required">The email is required</mat-error>
+        <mat-error *ngIf="email.errors?.minlength">
+          Your email must have minimum {{ email.errors?.minlength.requiredLength }} chars, but it has
+          only {{ email.errors?.minlength.actualLength }}
+        </mat-error>
+        <mat-error *ngIf="email.errors?.email">The email is invalid</mat-error>
       </mat-form-field>
 
       <mat-form-field>
 
-        <input matInput type="password" placeholder="Password">
-
+        <input matInput type="password"
+               placeholder="Password" formControlName="password">
+        <mat-error *ngIf="password.errors?.required">The password is required</mat-error>
+        <mat-error>
+          <ng-container *ngIf="password.errors | onlyOneError:['minlength', 'passwordStrength'] as error">
+            <span *ngIf="error?.minlength"> Your password must have minimum {{ error?.minlength.requiredLength }} chars,
+              but it has only {{ error?.minlength.actualLength }}
+            </span>
+            <span
+              *ngIf="error?.passwordStrength">The password must have lower case, upper case and numeric characters.</span>
+          </ng-container>
+        </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="logLogin()">
         Login
+      </button>
+      <button mat-raised-button (click)="reset()">
+        Reset
       </button>
 
     </form>
-
+    <div class="form-val">
+      {{ form.value|json }}
+    </div>
+    <div class="form-val">
+      email-errors: {{ email.errors|json }}
+    </div>
+    <div class="form-val">
+      password-errors: {{ password.errors|json }}
+    </div>
+    <div class="form-val">
+      form valid: {{ form.valid }}
+    </div>
   </mat-card-content>
 </mat-card>
