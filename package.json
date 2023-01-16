@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
+    "start-both": "concurrently \"ng serve  --proxy-config ./proxy.json\" \"ts-node -P ./server/server.tsconfig.json ./server/server.ts\"",
     "start": "ng serve  --proxy-config ./proxy.json",
     "server": "ts-node -P ./server/server.tsconfig.json ./server/server.ts",
     "build": "ng build",
@@ -24,6 +25,7 @@
     "@angular/platform-browser": "15.0.2",
     "@angular/platform-browser-dynamic": "15.0.2",
     "@angular/router": "15.0.2",
+    "concurrently": "^7.6.0",
     "core-js": "^2.4.1",
     "cors": "^2.8.5",
     "express": "^4.16.2",
